@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Règlements Sentura RP</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.0/marked.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent body scroll, content will scroll */
+        }
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2d3748; /* Darker track for dark mode */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a5568; /* Darker thumb for dark mode */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+
+        /* Dark mode specific styles */
+        html.dark {
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light text */
+        }
+        html.dark .bg-white {
+            background-color: #2d3748; /* Darker background for elements */
+        }
+        html.dark .text-gray-800 {
+            color: #e2e8f0;
+        }
+        html.dark .text-gray-600 {
+            color: #cbd5e0;
+        }
+        html.dark .border-gray-200 {
+            border-color: #4a5568;
+        }
+        html.dark .hover\\:bg-gray-100:hover {
+            background-color: #4a5568;
+        }
+        html.dark .focus\\:ring-blue-500:focus {
+            --tw-ring-color: #63b3ed; /* Lighter blue for dark mode focus */
+        }
+        html.dark input[type="text"] {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            border-color: #6b7280;
+        }
+        html.dark input[type="text"]::placeholder {
+            color: #cbd5e0;
+        }
+        html.dark .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+        }
+        html.dark .bg-blue-600 {
+            background-color: #3182ce; /* Darker blue for dark mode */
+        }
+        html.dark .hover\\:bg-blue-700:hover {
+            background-color: #2b6cb0;
+        }
+
+        /* Specific styles for markdown content */
+        .markdown-content h1 {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            margin-bottom: 1.5rem; /* mb-6 */
+            padding-bottom: 0.5rem; /* pb-2 */
+            border-bottom: 1px solid currentColor; /* border-b */
+        }
+        .markdown-content h2 {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 600; /* font-semibold */
+            margin-top: 2rem; /* mt-8 */
+            margin-bottom: 1rem; /* mb-4 */
+        }
+        .markdown-content h3 {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 600; /* font-semibold */
+            margin-top: 1.5rem; /* mt-6 */
+            margin-bottom: 0.75rem; /* mb-3 */
+        }
+        .markdown-content p {
+            margin-bottom: 1rem; /* mb-4 */
+            line-height: 1.6;
+        }
+        .markdown-content ul, .markdown-content ol {
+            margin-bottom: 1rem; /* mb-4 */
+            padding-left: 1.5rem; /* pl-6 */
+        }
+        .markdown-content ul li {
+            list-style-type: disc;
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+        .markdown-content ol li {
+            list-style-type: decimal;
+            margin-bottom: 0.5rem; /* mb-2 */
+        }
+        .markdown-content code {
+            background-color: #f0f0f0;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.875em;
+        }
+        html.dark .markdown-content code {
+            background-color: #4a5568;
+            color: #e2e8f0;
+        }
+        .markdown-content pre {
+            background-color: #f0f0f0;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+        html.dark .markdown-content pre {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+        .markdown-content a {
+            color: #3182ce; /* blue-600 */
+            text-decoration: underline;
+        }
+        html.dark .markdown-content a {
+            color: #63b3ed; /* lighter blue */
+        }
+    </style>
+</head>
+<body class="flex h-screen bg-gray-50 text-gray-800 transition-colors duration-300">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 bg-white shadow-md flex flex-col transition-all duration-300 transform -translate-x-full md:translate-x-0 md:relative absolute inset-y-0 left-0 z-50">
+        <div class="p-6 border-b border-gray-200 flex items-center justify-between">
+            <h1 class="text-2xl font-bold text-blue-600">Sentura RP</h1>
+            <button id="closeSidebar" class="md:hidden text-gray-600 hover:text-gray-800 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div class="p-4 border-b border-gray-200">
+            <input type="text" id="searchInput" placeholder="Rechercher..." class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <nav class="flex-1 overflow-y-auto p-4">
+            <ul id="sidebarNav">
+                <!-- Navigation items will be dynamically loaded here -->
+            </ul>
+        </nav>
+        <div class="p-4 border-t border-gray-200 flex justify-center">
+            <button id="darkModeToggle" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300">
+                Mode Sombre
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+        <header class="bg-white shadow-sm p-4 flex items-center justify-between md:hidden">
+            <button id="openSidebar" class="text-gray-600 hover:text-gray-800 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+            <h2 class="text-xl font-semibold text-blue-600">Sentura RP</h2>
+            <div class="w-6 h-6"></div> <!-- Placeholder for alignment -->
+        </header>
+
+        <main class="flex-1 overflow-y-auto p-6 md:p-8">
+            <h1 id="contentTitle" class="text-4xl font-bold mb-6 pb-2 border-b border-gray-300"></h1>
+            <div id="content" class="markdown-content text-gray-700 leading-relaxed">
+                <!-- Markdown content will be rendered here -->
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Data structure for the documentation content
+        const documentationContent = {
+            "introduction": {
+                title: "Introduction",
+                content: `
+# Bienvenue sur Sentura RP
+
+Bienvenue sur le wiki officiel des règlements de Sentura RP ! Ce guide est essentiel pour comprendre les bases et les règles avancées de notre serveur GTA V Roleplay.
+
+Que vous soyez un nouveau joueur ou un vétéran, nous vous encourageons à lire attentivement toutes les sections pour garantir une expérience de jeu fluide et agréable pour tous.
+
+## Qu'est-ce que Sentura RP ?
+
+Sentura RP est un serveur Roleplay sur Grand Theft Auto V, où l'immersion et la qualité du jeu de rôle sont nos priorités. Nous nous efforçons de créer un environnement réaliste et cohérent, où chaque action a des conséquences.
+
+Fondé par **Dave**, Sentura RP est une communauté dédiée à offrir une expérience de jeu de rôle exceptionnelle.
+
+## Objectif de ce Wiki
+
+Ce wiki a pour but de :
+* Fournir un accès facile et clair à toutes les règles du serveur.
+* Expliquer les concepts clés du rôleplay.
+* Détailler les métiers, les factions et les systèmes en jeu.
+* Aider les nouveaux joueurs à s'intégrintégrer rapidement.
+
+Nous vous souhaitons une excellente expérience sur Sentura RP !
+                `
+            },
+            "regles-generales": {
+                title: "Règles Générales",
+                content: `
+# Règles Générales de Sentura RP
+
+Ces règles s'appliquent à tous les joueurs, quel que soit leur rôle ou faction. Le non-respect de ces règles peut entraîner des avertissements, des bannissements temporaires ou permanents.
+
+## 1. Fairplay et Respect
+
+* **Respect mutuel :** Tout comportement toxique, insultes, harcèlement ou discrimination est strictement interdit. Le respect est la base de notre communauté.
+* **Anti-jeu (Fail RP) :** Il est interdit de briser l'immersion du rôleplay. Restez toujours dans votre personnage.
+* **Méta-gaming :** Utiliser des informations obtenues hors-jeu pour avantager votre personnage en jeu est interdit.
+* **Power-gaming :** Effectuer des actions irréalistes ou impossibles dans la vie réelle pour avantager votre personnage est interdit (ex: survivre à des chutes mortelles sans conséquences).
+
+## 2. Rôleplay et Immersion
+
+* **Cohérence du personnage :** Votre personnage doit avoir une histoire, des motivations et des réactions cohérentes avec son environnement.
+* **Fear RP :** Vous devez craindre pour la vie de votre personnage. Si vous êtes braqué, kidnappé ou menacé, vous devez réagir de manière réaliste à la situation.
+* **Value of Life (VoL) :** La vie de votre personnage a une valeur. Ne mettez pas votre vie en danger sans raison valable en RP.
+* **Force RP :** Ne forcez pas d'autres joueurs à faire du RP qu'ils ne veulent pas ou qui est irréaliste.
+
+## 3. Utilisation des Véhicules
+
+* **Conduite réaliste :** Respectez le code de la route autant que possible. Évitez la conduite fantaisiste ou les collisions volontaires sans raison RP.
+* **No-Value Vehicle (NVV) :** Ne pas utiliser les véhicules comme des armes ou des boucliers sans raison RP.
+
+## 4. Zones Sûres (Safe Zones)
+
+* Certaines zones sont considérées comme des zones sûres (ex: hôpitaux, concessions automobiles). Le meurtre ou les actions illégales y sont strictement interdits.
+* Les actions RP peuvent commencer ou se terminer en bordure de ces zones, mais jamais à l'intérieur.
+
+## 5. Mort RP (CK / PK)
+
+* **Character Kill (CK) :** La mort permanente de votre personnage. Cela doit être discuté et approuvé par un membre du staff et les parties impliquées.
+* **Player Kill (PK) :** La mort temporaire de votre personnage. Vous oubliez les événements qui ont mené à votre mort et les personnes impliquées.
+* Les règles spécifiques concernant le CK et le PK sont détaillées dans la section "Mort RP".
+                `
+            },
+            "regles-metiers": {
+                title: "Règles des Métiers",
+                content: `
+# Règles Spécifiques aux Métiers
+
+Chaque métier sur Sentura RP a ses propres responsabilités et limitations.
+
+## 1. Forces de l'Ordre (LSPD / BCSO)
+
+* **Respect de la loi :** Les agents doivent faire respecter la loi et l'ordre, tout en respectant les procédures et les droits des citoyens.
+* **Abus de pouvoir :** L'abus de pouvoir, la corruption ou l'utilisation excessive de la force sont strictement interdits et peuvent entraîner des sanctions sévères.
+* **Interventions :** Les agents doivent privilégier le dialogue et la négociation avant d'utiliser la force létale.
+* **Véhicules de fonction :** Utilisation des véhicules de police uniquement en service et de manière réaliste.
+
+## 2. Services Médicaux (EMS)
+
+* **Neutralité :** Les médecins et ambulanciers sont neutres et doivent soigner tout le monde, sans distinction.
+* **Non-combattant :** Les EMS ne sont pas autorisés à participer activement à des scènes de combat ou à porter des armes (sauf pour leur défense personnelle en cas d'agression directe et non-RP).
+* **Discrétion :** Les informations médicales des patients sont confidentielles.
+
+## 3. Mécaniciens
+
+* **Réparations :** Les mécaniciens doivent effectuer des réparations de véhicules de manière réaliste et facturer des prix justes.
+* **Neutralité :** Les mécaniciens sont généralement neutres, mais peuvent avoir des affiliations RP si cela est bien développé.
+* **Vol de véhicules :** Il est interdit de voler des véhicules ou des pièces dans le garage.
+
+## 4. Journalistes / Média
+
+* **Objectivité :** Les journalistes doivent rapporter les faits de manière objective et rechercher la vérité.
+* **Sécurité :** Les journalistes doivent prendre en compte leur propre sécurité lors de la couverture d'événements dangereux.
+* **Liberté de la presse :** Les autorités ne peuvent pas censurer les médias sans raison RP valable.
+
+## 5. Métiers Illégaux
+
+* **Discrétion :** Les activités illégales doivent être menées avec discrétion pour éviter d'attirer l'attention des forces de l'ordre.
+* **Conséquences :** Chaque action illégale a des conséquences potentielles (arrestation, prison, amendes).
+* **Respect des règles générales :** Même dans le milieu illégal, les règles de fairplay, de respect et d'anti-jeu s'appliquent.
+* **Pas de "Free Kill" :** Tuer un joueur sans raison RP valable est interdit.
+                `
+            },
+            "commandes-utiles": {
+                title: "Commandes Utiles",
+                content: `
+# Commandes Essentielles sur Sentura RP
+
+Voici une liste des commandes les plus courantes et utiles pour interagir sur le serveur.
+
+## Commandes Générales
+
+* \`/me [action]\` : Décrire une action que votre personnage fait (ex: \`/me sort son portefeuille\`).
+* \`/do [description]\` : Décrire un état ou une conséquence (ex: \`/do Le portefeuille est en cuir noir\`).
+* \`/try [action]\` : Tenter une action avec un résultat aléatoire (ex: \`/try tente de crocheter la serrure\`).
+* \`/ooc [message]\` : Parler hors-jeu (Out Of Character). À utiliser avec parcimonie et uniquement pour des questions techniques ou brèves.
+* \`/report [raison]\` : Signaler un joueur ou un problème au staff.
+* \`/aide [question]\` : Demander de l'aide au staff.
+
+## Commandes de Communication
+
+* \`/t [message]\` : Parler dans le chat vocal de proximité.
+* \`/whisper [message]\` : Chuchoter à un joueur proche.
+* \`/shout [message]\` : Crier (portée plus longue).
+* \`/radio [fréquence] [message]\` : Utiliser la radio sur une fréquence donnée.
+* \`/call [numéro]\` : Appeler un autre joueur.
+* \`/sms [numéro] [message]\` : Envoyer un SMS à un autre joueur.
+
+## Commandes de Véhicule
+
+* \`/moteur\` : Démarrer ou éteindre le moteur de votre véhicule.
+* \`/coffre\` : Ouvrir ou fermer le coffre de votre véhicule.
+* \`/portes\` : Verrouiller ou déverrouiller les portes de votre véhicule.
+* \`/clefs [ID joueur]\` : Donner les clefs de votre véhicule à un autre joueur.
+
+## Commandes d'Inventaire et Argent
+
+* \`/inventaire\` : Ouvrir votre inventaire.
+* \`/donner [ID joueur] [objet] [quantité]\` : Donner un objet à un autre joueur.
+* \`/argent [ID joueur] [montant]\` : Donner de l'argent liquide à un autre joueur.
+* \`/banque [montant]\` : Déposer ou retirer de l'argent de votre compte bancaire.
+
+## Commandes Spécifiques aux Métiers
+
+* \`/sirene\` (Police/EMS) : Activer/désactiver la sirène.
+* \`/menotter [ID joueur]\` (Police) : Menotter un suspect.
+* \`/soigner [ID joueur]\` (EMS) : Soigner un blessé.
+* \`/reparer [ID véhicule]\` (Mécanicien) : Réparer un véhicule.
+
+N'oubliez pas que l'utilisation abusive de certaines commandes peut être considérée comme du Fail RP ou de l'anti-jeu.
+                `
+            },
+            "lexique-roleplay": {
+                title: "Lexique du Roleplay",
+                content: `
+# Lexique du Roleplay 🗽
+
+Ce lexique a pour objectif d’expliquer de manière claire les différents comportements interdits sur le serveur, afin de garantir une expérience roleplay sérieuse, réaliste et équitable pour tous les joueurs.
+
+## RP Trans
+**Définition :** Incarner un personnage d’un genre différent de celui que vous êtes dans la vie réelle (par exemple : un homme jouant une femme, ou inversement).
+**Cas de figure :** Un joueur de sexe masculin crée et joue un personnage féminin.
+**Exemple :** Un joueur crée un personnage nommé « Sophie », de genre féminin, alors qu’il ne correspond pas à ce genre dans la réalité.
+**Rappel :** Cette pratique est interdite sur le serveur afin de prévenir les comportements déplacés, les malaises liés à l’identité de genre, ainsi que les risques de moqueries, de discriminations ou de propos offensants pouvant en découler. Le respect de chacun est primordial dans un cadre RP sain et inclusif.
+
+## Cohérence RP
+**Définition :** Le manque de cohérence RP se traduit par des actions, comportements ou décisions qui ne respectent pas l’univers du jeu, les lois de la logique ou le contexte du personnage
+**Cas de figure :** Un joueur agit d’une manière totalement illogique par rapport à son rôle, sa situation, ou l’environnement dans lequel il évolue.
+**Exemple :** Un mécanicien qui sort une arme lourde de son coffre pour affronter un gang, alors qu’il est censé être un civil sans formation militaire. Ou encore un civil qui survit à plusieurs balles dans le torse et continue à courir comme si de rien n’était.
+
+## Free-Kill
+**Définition :** Tuer un joueur sans raison RP valable ou sans scénario logique.
+**Cas de figure :** Un joueur tue un autre joueur sur un coup de tête sans interaction préalable.
+**Exemple :** Quelqu'un sort son arme et tire sur un passant car "il ne l’aime pas" ou parce qu’il veut le voler, sans mise en scène RP.
+
+## NLR (New Life Rule)
+**Définition :** Après une mort RP (coma, blessure grave), le personnage ne se souvient plus des événements passés.
+**Cas de figure :** Revenir sur le lieu de sa mort pour se venger ou continuer un conflit.
+**Exemple :** Après être tombé dans le coma à la suite d'une fusillade, un joueur revient armé pour tuer ses assaillants.
+
+## FreeTase
+**Définition :** Utiliser un taser sans raison RP valable.
+**Cas de figure :** Un policier tase une personne sans motif ou justification.
+**Exemple :** Un agent de police tase un civil simplement car il court.
+
+## Free-Shot
+**Définition :** Ouvrir le feu sans raison RP.
+**Cas de figure :** Un joueur tire sans dialogue ni interaction.
+**Exemple :** Une personne sort de son véhicule et commence à tirer sur un groupe sans provocation ni parole.
+
+## Free-Jail
+**Définition :** Emprisonner un joueur sans fondement RP.
+**Cas de figure :** Un policier envoie un suspect en prison sans procédure ni preuve.
+**Exemple :** Un agent arrête un joueur et le met directement en cellule sans fouille, lecture des droits ou scénario RP.
+
+## Free-Arrest
+**Définition :** Procéder à une arrestation injustifiée.
+**Cas de figure :** Arrêter un joueur sans raison ou preuve.
+**Exemple :** Une personne en tenue suspecte est arrêtée sur simple apparence, sans action RP préalable.
+
+## Cop Bait
+**Définition :** Provoquer volontairement les forces de l'ordre.
+**Cas de figure :** Faire exprès de créer une infraction pour déclencher une intervention policière.
+**Exemple :** Passer en drift devant un commissariat pour que la police poursuive.
+
+## HRP (Hors Rôleplay)
+**Définition :** Parler ou agir hors du contexte RP.
+**Cas de figure :** Mentionner des éléments extérieurs au jeu (Discord, staff, etc.).
+**Exemple :** Dire « Je vais appeler un admin » pendant une scène RP.
+
+## NoPain RP
+**Définition :** Ignorer la douleur que son personnage devrait ressentir.
+**Cas de figure :** Se relever normalement après s'être fait tirer dessus.
+**Exemple :** Prendre trois balles et continuer à courir comme si de rien n'était.
+
+## Free-Punch
+**Définition :** Frapper sans raison RP valable.
+**Cas de figure :** Donner un coup de poing sans dialogue ou menace.
+**Exemple :** Frappes gratuites sur un joueur croisé dans la rue.
+
+## NoFear RP
+**Définition :** Ne pas ressentir de peur dans des situations où celle-ci est obligatoire.
+**Cas de figure :** Menacer un groupe armé alors qu'on est seul.
+**Exemple :** Un civil désarmé insulte un braqueur qui pointe une arme sur lui.
+
+## PowerGaming
+**Définition :** Forcer une action ou réaliser des actes impossibles IRL.
+**Cas de figure :** Sortir une arme d’une poche inexistante.
+**Exemple :** "Je te menotte automatiquement avec mes lacets"
+
+## ForceRP
+**Définition :** Imposer une action à un autre joueur sans qu'il puisse réagir.
+**Cas de figure :** Menotter quelqu'un sans laisser de chance à l’autre joueur de réagir.
+**Exemple :** "Tu tombes au sol, tu ne bouges plus et je t'attache"
+
+## MétaGaming
+**Définition :** Utiliser des informations obtenues hors RP dans le jeu.
+**Cas de figure :** Rejoindre une scène de fusillade vue sur un live ou Discord.
+**Exemple :** Un joueur appelle ses amis en vocal Discord pour venir l’aider dans une scène RP.
+
+## Free-Loot
+**Définition :** Fouiller un joueur sans réelle mise en scène RP.
+**Cas de figure :** Loot automatique d'un blessé sans interaction.
+**Exemple :** Fouiller un corps inconscient sans emote ni vérification RP.
+
+## MassRP
+**Définition :** Tenir compte de l’environnement RP global (ville peuplée).
+**Cas de figure :** Commettre un crime grave en plein lieu public.
+**Exemple :** Braquage en plein jour devant l’hôpital sans aucune précaution.
+
+## CarKill
+**Définition :** Renverser volontairement des joueurs sans justification.
+**Cas de figure :** Utiliser la voiture comme arme principale.
+**Exemple :** Fauchage d’un groupe de civils en roulant à pleine vitesse.
+
+## Win RP
+**Définition :** Vouloir "gagner" chaque scène RP, au mépris de la logique.
+**Cas de figure :** Refuser toute perte, se relever systématiquement, esquiver les conséquences.
+**Exemple :** Prétendre être invincible ou s’enfuir en toutes circonstances.
+
+## Raccourcis RP
+**Définition :** Tirer des conclusions trop rapides sans preuve RP.
+**Cas de figure :** Assimiler une couleur de vêtement à un gang.
+**Exemple :** "Il est en jaune, donc c’est un Vagos"
+
+## Chicken Run
+**Définition :** Courir dans tous les sens pour éviter les balles ou la police.
+**Cas de figure :** Zigzaguer sans logique RP.
+**Exemple :** Un joueur se fait tirer dessus et court en ligne droite puis change de direction en boucle.
+
+## Bunny Hopping
+**Définition :** Sauter en courant pour aller plus vite.
+**Cas de figure :** Abuser du mécanisme de saut pour se déplacer.
+**Exemple :** Un joueur s’enfuit d’une scène de crime en sautant frénétiquement pour gagner du temps.
+                `
+            },
+            "faq": {
+                title: "FAQ - Foire Aux Questions",
+                content: `
+# FAQ - Foire Aux Questions Sentura RP
+
+Vous trouverez ici les réponses aux questions fréquemment posées.
+
+## Questions Générales
+
+* **Q: Comment rejoindre le serveur Sentura RP ?**
+    R: Vous devez d'abord lire et accepter nos règlements, puis postuler via notre Discord officiel. Toutes les informations sont disponibles sur le Discord.
+
+* **Q: J'ai un problème technique, que dois-je faire ?**
+    R: Rendez-vous sur notre Discord et ouvrez un ticket dans la section "Support Technique". Décrivez votre problème le plus précisément possible.
+
+* **Q: Puis-je streamer ou enregistrer sur Sentura RP ?**
+    R: Oui, vous êtes autorisé à streamer ou enregistrer votre gameplay, à condition de respecter toutes les règles du serveur et de ne pas diffuser de contenu qui brise le RP des autres joueurs sans leur accord.
+
+## Questions sur le Rôleplay
+
+* **Q: Qu'est-ce que le "Fear RP" ?**
+    R: Le Fear RP signifie que vous devez agir comme si vous aviez peur pour la vie de votre personnage dans des situations dangereuses (ex: être braqué par une arme). Ne pas le faire est considéré comme du Fail RP.
+
+* **Q: Qu'est-ce que le "Méta-gaming" ?**
+    R: Le Méta-gaming est l'utilisation d'informations obtenues hors-jeu (par exemple, via Discord, un stream, ou en écoutant des conversations OOC) pour influencer les actions de votre personnage en jeu. C'est strictement interdit.
+
+* **Q: Mon personnage est mort, que se passe-t-il ?**
+    R: Si c'est un PK (Player Kill), votre personnage oublie les événements récents et se réveille à l'hôpital. Si c'est un CK (Character Kill), votre personnage est mort définitivement et vous devrez en créer un nouveau. Le CK est rare et doit être validé par le staff.
+
+## Questions sur les Métiers / Factions
+
+* **Q: Comment rejoindre une faction légale (Police, EMS) ?**
+    R: Les recrutements pour les factions légales sont annoncés sur notre Discord. Vous devrez passer par un processus de candidature et de formation.
+
+* **Q: Puis-je créer ma propre organisation criminelle ?**
+    R: Oui, mais cela nécessite une approbation du staff et un développement RP solide. Contactez un administrateur pour discuter de votre projet.
+
+* **Q: Les mécaniciens peuvent-ils refuser de réparer un véhicule ?**
+    R: Oui, s'il y a une raison RP valable (ex: le mécanicien est en danger, le client est agressif, pas de pièces disponibles).
+
+Si votre question n'est pas listée ici, n'hésitez pas à la poser sur notre Discord !
+                `
+            }
+        };
+
+        const sidebarNav = document.getElementById('sidebarNav');
+        const contentTitle = document.getElementById('contentTitle');
+        const contentDiv = document.getElementById('content');
+        const searchInput = document.getElementById('searchInput');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const sidebar = document.getElementById('sidebar');
+        const openSidebarBtn = document.getElementById('openSidebar');
+        const closeSidebarBtn = document.getElementById('closeSidebar');
+
+        // Function to render Markdown
+        const renderMarkdown = (markdown) => {
+            return marked.parse(markdown);
+        };
+
+        // Function to load content based on key
+        const loadContent = (key) => {
+            const item = documentationContent[key];
+            if (item) {
+                contentTitle.textContent = item.title;
+                contentDiv.innerHTML = renderMarkdown(item.content);
+                // Update URL hash
+                window.location.hash = key;
+                // Scroll to top of content
+                document.querySelector('main').scrollTo(0, 0);
+                // Close sidebar on mobile
+                if (window.innerWidth < 768) { // md breakpoint in Tailwind
+                    sidebar.classList.add('-translate-x-full');
+                }
+            } else {
+                contentTitle.textContent = "Page non trouvée";
+                contentDiv.innerHTML = `<p>Désolé, la page que vous recherchez n'existe pas.</p>`;
+            }
+        };
+
+        // Function to build sidebar navigation
+        const buildSidebar = (filter = '') => {
+            sidebarNav.innerHTML = ''; // Clear existing items
+            for (const key in documentationContent) {
+                const item = documentationContent[key];
+                const title = item.title.toLowerCase();
+                const matchesFilter = filter === '' || title.includes(filter.toLowerCase());
+
+                if (matchesFilter) {
+                    const li = document.createElement('li');
+                    li.className = 'mb-2';
+                    const a = document.createElement('a');
+                    a.href = `#${key}`;
+                    a.className = 'block p-2 rounded-md text-gray-600 hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200 dark:text-gray-300 dark:hover:bg-blue-800 dark:hover:text-white';
+                    a.textContent = item.title;
+                    a.onclick = (e) => {
+                        e.preventDefault();
+                        loadContent(key);
+                    };
+                    li.appendChild(a);
+                    sidebarNav.appendChild(li);
+                }
+            }
+        };
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            buildSidebar(e.target.value);
+        });
+
+        // Dark mode toggle
+        darkModeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const isDarkMode = document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            darkModeToggle.textContent = isDarkMode ? 'Mode Clair' : 'Mode Sombre';
+        });
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            darkModeToggle.textContent = 'Mode Clair';
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkModeToggle.textContent = 'Mode Sombre';
+        }
+
+        // Mobile sidebar toggle
+        openSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.remove('-translate-x-full');
+        });
+
+        closeSidebarBtn.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+        });
+
+        // Initial load based on URL hash or default to introduction
+        const initialLoad = () => {
+            buildSidebar(); // Build sidebar first
+            const hash = window.location.hash.substring(1); // Remove '#'
+            if (hash && documentationContent[hash]) {
+                loadContent(hash);
+            } else {
+                loadContent('introduction'); // Default page
+            }
+        };
+
+        // Listen for hash changes (e.g., back/forward buttons)
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && documentationContent[hash]) {
+                loadContent(hash);
+            } else if (!hash) { // If hash is empty, load default
+                loadContent('introduction');
+            }
+        });
+
+        // Run initial load when the DOM is ready
+        document.addEventListener('DOMContentLoaded', initialLoad);
+    </script>
+</body>
+</html>
